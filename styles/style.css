@@ -348,3 +348,31 @@ label:has(input[type=checkbox]) {
     width: auto;
     background-color: white;
 }
+
+/* Slideshow */
+
+figure {
+    position: absolute;
+    transition: all 1s;
+    left: 0%;
+}
+
+.button-previous,
+.button-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+}
+
+.button-next {
+    right: 0;
+}
+
+.slide-img {
+    max-height: 80vh;
+    width: auto;
+}
+
+.hidden {
+    left: -100%;
+}

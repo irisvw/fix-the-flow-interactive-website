@@ -516,37 +516,72 @@ const artObjectsList = {
   ]
 }
 
-let gallery = document.querySelector(".gallery");
+buttonNext = document.querySelector(".button-next");
+buttonPrevious = document.querySelector(".button-previous");
 
-function generateGallery() {
-  artObjectsList.data.forEach(element => {
-    let item = generateImage('#', element.image, element.title, element.techniques);
-    gallery.appendChild(item);
-  });
-}
+slideA = document.querySelector("#slide-1");
+slideB = document.querySelector("#slide-2");
 
-function generateImage(link, source, altText, category) {
-  let listItem = document.createElement('li');
-  let anchor = document.createElement('a');
-  let image = document.createElement('img');
-
-  anchor.setAttribute('href', link);
-  anchor.setAttribute('aria-label', "details");
-
-  image.setAttribute('width', '250');
-  image.setAttribute('src', source);
-  image.setAttribute('alt', altText);
-  image.setAttribute('data-category', category);
-
-  anchor.appendChild(image);
-  listItem.appendChild(anchor);
-  return listItem;
-}
-
-generateGallery();
-
-window.addEventListener("scroll", function () {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    generateGallery();
+buttonNext.addEventListener("click", function () { 
+  if (slideA.classList.contains("hidden")) {
+    slideA.classList.remove("hidden");
+    slideB.classList.add("hidden");
+  } else {
+    slideA.classList.add("hidden");
+    slideB.classList.remove("hidden");
   }
-});
+})
+
+buttonPrevious.addEventListener("click", function () { 
+  if (slideA.classList.contains("hidden")) {
+    slideA.classList.remove("hidden");
+    slideB.classList.add("hidden");
+  } else {
+    slideA.classList.add("hidden");
+    slideB.classList.remove("hidden");
+  }
+})
+
+// let gallery = document.querySelector(".gallery");
+
+// function generateGallery() {
+//   artObjectsList.data.forEach(element => {
+//     let item = generateImage('#', element.image, element.title, element.techniques);
+//     gallery.appendChild(item);
+//   });
+// }
+
+// function generateImage(link, source, altText, category) {
+//   let listItem = document.createElement('li');
+//   let anchor = document.createElement('a');
+//   let image = document.createElement('img');
+
+//   anchor.setAttribute('href', link);
+//   anchor.setAttribute('aria-label', "details");
+
+//   image.setAttribute('width', '250');
+//   image.setAttribute('src', source);
+//   image.setAttribute('alt', altText);
+//   image.setAttribute('data-category', category);
+
+//   anchor.appendChild(image);
+//   listItem.appendChild(anchor);
+//   return listItem;
+// }
+
+// generateGallery();
+
+// window.addEventListener("scroll", function () {
+//   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//     generateGallery();
+//   }
+// });
+
+// There are four categories: tapestry, islamic art, pottery & glass.
+// There will be one slide for each category: four slides total.
+// When going to the next slide, a random picture from that category will be picked.
+
+// On page load: shuffle all the categories into an array.
+// Pick a random picture from the first category.
+// On 'next', pick a random picture from the second category.
+// On 'previous', pick a random picture from the last category.
