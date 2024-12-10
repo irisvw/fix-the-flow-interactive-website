@@ -523,94 +523,36 @@ let slidePrevious = document.querySelector("#slide-0");
 let slideCurrent = document.querySelector("#slide-1");
 let slideNext = document.querySelector("#slide-2");
 
-buttonNext.addEventListener("click", function () { 
-  // if (slideA.classList.contains("hidden")) {
-  //   slideA.classList.remove("hidden");
-  //   slideB.classList.add("hidden");
-  // } else {
-  //   slideA.classList.add("hidden");
-  //   slideB.classList.remove("hidden");
-  // }
-  
+buttonNext.addEventListener("click", function () {
   slidePrevious = slideCurrent;
-  if (slideCurrent.nextElementSibling) { slideCurrent = slideCurrent.nextElementSibling; console.log(slideCurrent.nextElementSibling); }
-  console.log(slideCurrent);
+  if (slideCurrent.nextElementSibling) { slideCurrent = slideCurrent.nextElementSibling; }
+
   // slideNext = generateImage();
   updateNext();
 })
 
-buttonPrevious.addEventListener("click", function () { 
-  // if (slideA.classList.contains("hidden")) {
-  //   slideA.classList.remove("hidden");
-  //   slideB.classList.add("hidden");
-  // } else {
-  //   slideA.classList.add("hidden");
-  //   slideB.classList.remove("hidden");
-  // }
-
+buttonPrevious.addEventListener("click", function () {
   slideNext = slideCurrent;
   if (slideCurrent.previousElementSibling) { slideCurrent = slideCurrent.previousElementSibling; }
+
   // slidePrevious = generateImage();
-  console.log(slideCurrent);  
   updatePrevious();
 })
-
-// function update() {
-//   slidePrevious.classList.add("previous-item");
-//   slideNext.classList.add("next-item");
-  
-//   if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
-//   if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
-// }
 
 function updateNext() {
   // console.log(slideCurrent);
   slidePrevious.classList.add("previous-item");
-  
+
   if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
   if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
 }
 
 function updatePrevious() {
   slideNext.classList.add("next-item");
-  
+
   if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
   if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
 }
-// let gallery = document.querySelector(".gallery");
-
-// function generateGallery() {
-//   artObjectsList.data.forEach(element => {
-//     let item = generateImage('#', element.image, element.title, element.techniques);
-//     gallery.appendChild(item);
-//   });
-// }
-
-// function generateImage(link, source, altText, category) {
-//   let listItem = document.createElement('li');
-//   let anchor = document.createElement('a');
-//   let image = document.createElement('img');
-
-//   anchor.setAttribute('href', link);
-//   anchor.setAttribute('aria-label', "details");
-
-//   image.setAttribute('width', '250');
-//   image.setAttribute('src', source);
-//   image.setAttribute('alt', altText);
-//   image.setAttribute('data-category', category);
-
-//   anchor.appendChild(image);
-//   listItem.appendChild(anchor);
-//   return listItem;
-// }
-
-// generateGallery();
-
-// window.addEventListener("scroll", function () {
-//   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-//     generateGallery();
-//   }
-// });
 
 // There are four categories: tapestry, islamic art, pottery & glass.
 // There will be one slide for each category: four slides total.
