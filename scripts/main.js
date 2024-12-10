@@ -516,32 +516,67 @@ const artObjectsList = {
   ]
 }
 
-buttonNext = document.querySelector(".button-next");
-buttonPrevious = document.querySelector(".button-previous");
+let buttonNext = document.querySelector(".button-next");
+let buttonPrevious = document.querySelector(".button-previous");
 
-slideA = document.querySelector("#slide-1");
-slideB = document.querySelector("#slide-2");
+let slidePrevious = document.querySelector("#slide-0");
+let slideCurrent = document.querySelector("#slide-1");
+let slideNext = document.querySelector("#slide-2");
 
 buttonNext.addEventListener("click", function () { 
-  if (slideA.classList.contains("hidden")) {
-    slideA.classList.remove("hidden");
-    slideB.classList.add("hidden");
-  } else {
-    slideA.classList.add("hidden");
-    slideB.classList.remove("hidden");
-  }
+  // if (slideA.classList.contains("hidden")) {
+  //   slideA.classList.remove("hidden");
+  //   slideB.classList.add("hidden");
+  // } else {
+  //   slideA.classList.add("hidden");
+  //   slideB.classList.remove("hidden");
+  // }
+  
+  slidePrevious = slideCurrent;
+  if (slideCurrent.nextElementSibling) { slideCurrent = slideCurrent.nextElementSibling; console.log(slideCurrent.nextElementSibling); }
+  console.log(slideCurrent);
+  // slideNext = generateImage();
+  updateNext();
 })
 
 buttonPrevious.addEventListener("click", function () { 
-  if (slideA.classList.contains("hidden")) {
-    slideA.classList.remove("hidden");
-    slideB.classList.add("hidden");
-  } else {
-    slideA.classList.add("hidden");
-    slideB.classList.remove("hidden");
-  }
+  // if (slideA.classList.contains("hidden")) {
+  //   slideA.classList.remove("hidden");
+  //   slideB.classList.add("hidden");
+  // } else {
+  //   slideA.classList.add("hidden");
+  //   slideB.classList.remove("hidden");
+  // }
+
+  slideNext = slideCurrent;
+  if (slideCurrent.previousElementSibling) { slideCurrent = slideCurrent.previousElementSibling; }
+  // slidePrevious = generateImage();
+  console.log(slideCurrent);  
+  updatePrevious();
 })
 
+// function update() {
+//   slidePrevious.classList.add("previous-item");
+//   slideNext.classList.add("next-item");
+  
+//   if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
+//   if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
+// }
+
+function updateNext() {
+  // console.log(slideCurrent);
+  slidePrevious.classList.add("previous-item");
+  
+  if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
+  if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
+}
+
+function updatePrevious() {
+  slideNext.classList.add("next-item");
+  
+  if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
+  if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
+}
 // let gallery = document.querySelector(".gallery");
 
 // function generateGallery() {
