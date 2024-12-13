@@ -516,6 +516,7 @@ const artObjectsList = {
   ]
 }
 
+// Get the buttons used to navigate back and forth.
 let buttonNext = document.querySelector(".button-next");
 let buttonPrevious = document.querySelector(".button-previous");
 
@@ -523,8 +524,14 @@ let slidePrevious = document.querySelector("#slide-0");
 let slideCurrent = document.querySelector("#slide-1");
 let slideNext = document.querySelector("#slide-2");
 
+// Generate a shuffled list of techniques.
+let list = generateList();
+let currentItem = 0;
+
 buttonNext.addEventListener("click", function () {
+  // the current slide becomes the previous slide (why does this work? because i remove it again in line 554 lmao)
   slidePrevious = slideCurrent;
+  // if a next slide exists, make it the currentslide
   if (slideCurrent.nextElementSibling) { slideCurrent = slideCurrent.nextElementSibling; }
 
   // slideNext = generateImage();
@@ -541,6 +548,7 @@ buttonPrevious.addEventListener("click", function () {
 
 function updateNext() {
   // console.log(slideCurrent);
+  currentItem += 1;
   slidePrevious.classList.add("previous-item");
 
   if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
@@ -548,11 +556,51 @@ function updateNext() {
 }
 
 function updatePrevious() {
+  currentItem -= 1;
+  if (currentItem == -1) { currentItem = list.length };
   slideNext.classList.add("next-item");
 
   if (slideCurrent.classList.contains("previous-item")) { slideCurrent.classList.remove("previous-item"); }
   if (slideCurrent.classList.contains("next-item")) { slideCurrent.classList.remove("next-item"); }
 }
+
+function generateList() {
+  let list = [];
+  // For each element in the artObjectsList, add the technique used to list, but only if it is not included in list yet.
+  artObjectsList.data.forEach(element => { if (list.includes(element.techniques) == false) { list.push(element.techniques) } });
+  // Shuffle the list, so any technique has a chance to appear first.
+  return list.sort((a, b) => 0.5 - Math.random());
+}
+
+function pickImage(category) {
+  // while picture isnt the category
+  // pick a random picture from the list
+  let artObject;
+  while (artObject.techniques != list[currentItem]) {
+    artObject = artObjectsList[Math.floor(Math.random() * artObjectsList.length)];
+  }
+  return artObject;
+}
+
+function generateImage(link, source, altText, category) {
+  let listItem = document.createElement('li');
+  let anchor = document.createElement('a');
+  let image = document.createElement('img');
+
+  anchor.setAttribute('href', link);
+  anchor.setAttribute('aria-label', "details");
+
+  image.setAttribute('width', '250');
+  image.setAttribute('src', source);
+  image.setAttribute('alt', altText);
+  image.setAttribute('data-category', category);
+
+  anchor.appendChild(image);
+  listItem.appendChild(anchor);
+  return listItem;
+}
+
+console.log(list);
 
 // There are four categories: tapestry, islamic art, pottery & glass.
 // There will be one slide for each category: four slides total.
