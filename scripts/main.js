@@ -1,7 +1,7 @@
 const artObjectsList = {
   "data": [
     {
-      "image": "assets/unsplash-1.jpg",
+      "image": "assets/pottery1.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -20,7 +20,7 @@ const artObjectsList = {
       "techniques": "Pottery"
     },
     {
-      "image": "assets/unsplash-2.jpg",
+      "image": "assets/islamic1.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -39,7 +39,7 @@ const artObjectsList = {
       "techniques": "Islamic Art"
     },
     {
-      "image": "assets/unsplash-3.jpg",
+      "image": "assets/tapestry1.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -58,7 +58,7 @@ const artObjectsList = {
       "techniques": "Tapestry"
     },
     {
-      "image": "assets/unsplash-4.jpg",
+      "image": "assets/glass1.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -77,7 +77,7 @@ const artObjectsList = {
       "techniques": "Glass"
     },
     {
-      "image": "assets/unsplash-5.jpg",
+      "image": "assets/pottery1.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -96,7 +96,7 @@ const artObjectsList = {
       "techniques": "Pottery"
     },
     {
-      "image": "assets/unsplash-6.jpg",
+      "image": "assets/islamic-2.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -115,7 +115,7 @@ const artObjectsList = {
       "techniques": "Islamic Art"
     },
     {
-      "image": "assets/unsplash-7.jpg",
+      "image": "assets/tapestry2.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -134,7 +134,7 @@ const artObjectsList = {
       "techniques": "Tapestry"
     },
     {
-      "image": "assets/unsplash-8.jpg",
+      "image": "assets/glass2.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -153,7 +153,7 @@ const artObjectsList = {
       "techniques": "Glass"
     },
     {
-      "image": "assets/unsplash-9.jpg",
+      "image": "assets/pottery1.jpg",
       "displayDate": null,
       "productionCulturalGroup": null,
       "site": null,
@@ -525,8 +525,21 @@ let slideCurrent = document.querySelector("#slide-1");
 let slideNext = document.querySelector("#slide-2");
 
 // Generate a shuffled list of techniques.
-let list = generateList();
+let techniques = generateList();
+let techniqueLists = {};
 let currentItem = 0;
+
+artObjectsList.data.forEach(artObject => {
+  // for each art object, get the technique used
+  const technique = artObject.techniques;
+  // if techniqueLists doesn't contain that technique yet;
+  if (!techniqueLists[technique]) {
+    // make a new array for that technique and store it in techniqueLists.
+    techniqueLists[technique] = [];
+  }
+  // then add the artObject to its corresponding list.
+  techniqueLists[technique].push(artObject);
+});
 
 buttonNext.addEventListener("click", function () {
   // the current slide becomes the previous slide (why does this work? because i remove it again in line 554 lmao)
@@ -540,7 +553,11 @@ buttonNext.addEventListener("click", function () {
 
 buttonPrevious.addEventListener("click", function () {
   slideNext = slideCurrent;
-  if (slideCurrent.previousElementSibling) { slideCurrent = slideCurrent.previousElementSibling; }
+  if (slideCurrent.previousElementSibling) { 
+    slideCurrent = slideCurrent.previousElementSibling; 
+  } else {
+
+  }
 
   // slidePrevious = generateImage();
   updatePrevious();
@@ -567,24 +584,26 @@ function updatePrevious() {
 function generateList() {
   let list = [];
   // For each element in the artObjectsList, add the technique used to list, but only if it is not included in list yet.
-  artObjectsList.data.forEach(element => { if (list.includes(element.techniques) == false) { list.push(element.techniques) } });
+  artObjectsList.data.forEach(element => { if (!list.includes(element.techniques)) { list.push(element.techniques) } });
   // Shuffle the list, so any technique has a chance to appear first.
   return list.sort((a, b) => 0.5 - Math.random());
 }
 
-function pickImage(category) {
-  // while picture isnt the category
-  // pick a random picture from the list
-  let artObject;
-  while (artObject.techniques != list[currentItem]) {
-    artObject = artObjectsList[Math.floor(Math.random() * artObjectsList.length)];
-  }
-  return artObject;
-}
+// function pickImage(category) {
+//   // while picture isnt the category
+//   // pick a random picture from the list
+//   let artObject;
+//   while (artObject.techniques != list[currentItem]) {
+//     artObject = artObjectsList[Math.floor(Math.random() * artObjectsList.length)];
+//   }
+//   return artObject;
+// }
 
 function generateImage(link, source, altText, category) {
   let listItem = document.createElement('li');
   let anchor = document.createElement('a');
+  let figure = document.createElement('figure');
+  let caption = document.createElement('figcaption');
   let image = document.createElement('img');
 
   anchor.setAttribute('href', link);
@@ -595,12 +614,14 @@ function generateImage(link, source, altText, category) {
   image.setAttribute('alt', altText);
   image.setAttribute('data-category', category);
 
-  anchor.appendChild(image);
+  figure.appendChild(image);
+  figure.appendChild(caption);
+  anchor.appendChild(figure);
   listItem.appendChild(anchor);
   return listItem;
 }
 
-console.log(list);
+// console.log(list);
 
 // There are four categories: tapestry, islamic art, pottery & glass.
 // There will be one slide for each category: four slides total.
@@ -610,3 +631,6 @@ console.log(list);
 // Pick a random picture from the first category.
 // On 'next', pick a random picture from the second category.
 // On 'previous', pick a random picture from the last category.
+
+// Add an event listener to each of the filter buttons.
+// On click, load the first three items of the corresponding array.

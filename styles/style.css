@@ -411,3 +411,13 @@ figure {
 .gallery-slideshow {
     display: block;
 }
+
+.active {
+ border-bottom: 1px solid black;
+}
+
+.active-filter {
+    /* border-bottom: 1px solid white; */
+    text-decoration: underline;
+    text-underline-offset: .5em;
+}
