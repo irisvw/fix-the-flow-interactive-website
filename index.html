@@ -137,21 +137,45 @@
         <a href="#filters" class="skip visually-hidden link">Skip to gallery navigation</a>
 
         <ul class="gallery-slideshow">
-            <li id="slide-0" class="previous-item slide-img">
+            <li class="slide current-item">
                 <figure>
                     <img src="assets/tapestry1.jpg" alt="tapestry" class="slide-img">
                     <figcaption>Tapestry</figcaption>
                 </figure>
             </li>
-            <li id="slide-1" class="slide-img">
+            <li class="slide next-item">
                 <figure>
                     <img src="assets/pottery1.jpg" alt="pottery" class="slide-img">
                     <figcaption>Pottery</figcaption>
                 </figure>
             </li>
-            <li id="slide-2" class="next-item slide-img">
+            <li class="slide">
                 <figure>
                     <img src="assets/glass1.jpg" alt="glass" class="slide-img">
+                    <figcaption>Glass</figcaption>
+                </figure>
+            </li>
+            <li class="slide">
+                <figure>
+                    <img src="assets/islamic1.jpg" alt="glass" class="slide-img">
+                    <figcaption>Glass</figcaption>
+                </figure>
+            </li>
+            <li class="slide">
+                <figure>
+                    <img src="assets/tapestry2.jpg" alt="glass" class="slide-img">
+                    <figcaption>Glass</figcaption>
+                </figure>
+            </li>
+            <li class="slide">
+                <figure>
+                    <img src="assets/glass2.jpg" alt="glass" class="slide-img">
+                    <figcaption>Glass</figcaption>
+                </figure>
+            </li>
+            <li class="slide previous-item">
+                <figure>
+                    <img src="assets/islamic2.jpg" alt="glass" class="slide-img">
                     <figcaption>Glass</figcaption>
                 </figure>
             </li>
@@ -161,11 +185,11 @@
         <button class="button button-outline button-next">Next</button>
         <nav class="gallery-navigation" id="filters" aria-label="Gallery">
             <ul class="filter-list">
-                <li><a href="#" class="button filter active-filter">All Objects</a></li>
-                <li><a href="#" class="button filter">Pottery</a></li>
-                <li><a href="#" class="button filter">Islamic Art</a></li>
-                <li><a href="#" class="button filter">Tapestry</a></li>
-                <li><a href="#" class="button filter">Glass</a></li>
+                <li><a href="#" class="button filter active-filter" id="filter-all">All Objects</a></li>
+                <li><a href="#" class="button filter" id="filter-pottery">Pottery</a></li>
+                <li><a href="#" class="button filter" id="filter-islamic">Islamic Art</a></li>
+                <li><a href="#" class="button filter" id="filter-tapestry">Tapestry</a></li>
+                <li><a href="#" class="button filter" id="filter-glass">Glass</a></li>
             </ul>
 
             <form class="search-form" role="search">
